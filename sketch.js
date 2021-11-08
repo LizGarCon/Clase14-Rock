@@ -8,7 +8,8 @@ let engine;
 let world;
 var ball;
 var ground;
-var rock;
+var rock, wall;
+
 
 function setup() {
   createCanvas(400,400);
@@ -32,13 +33,22 @@ function setup() {
 
   ground = Bodies.rectangle(200,390,400,20,ground_options);
   World.add(world,ground);
-
+  
   ball = Bodies.circle(100,10,20,ball_options);
   World.add(world,ball);
-
+  
   rock = Bodies.circle(300,20,10,rock_options);
   World.add(world,rock);
   
+  var wall_options = {
+    restitution: 0.3,
+    frictionAir:0.01
+  }
+  
+  wall = Bodies.rectangle(300,200,200,20,wall_options);
+  World.add(world,wall);
+
+
   rectMode(CENTER);
   ellipseMode(RADIUS);
 }
@@ -52,6 +62,7 @@ function draw()
   ellipse(ball.position.x,ball.position.y,20);
   ellipse(rock.position.x,rock.position.y,20);
   rect(ground.position.x,ground.position.y,400,20);
+  rect(wall.position.x,wall.position.y,200,10);
  
 }
 
